@@ -1,0 +1,16 @@
+<launch>
+  <arg name ="publish_covariance" default="true"/>
+   <group if="$(arg publish_covariance)">
+    <param name="laser_scan_matcher_node/do_compute_covariance" value="1"/>
+    <param name="laser_scan_matcher_node/publish_pose_with_covariance" value="true"/>
+    <param name="laser_scan_matcher_node/publish_pose_with_covariance_stamped" value="true"/>
+  </group>
+  <node pkg="laser_scan_matcher" type="laser_scan_matcher_node"
+    name="laser_scan_matcher_node" output="screen">
+    <param name="fixed_frame" value="odom"/>
+    <param name="use_alpha_beta" value="true"/>
+    <param name="max_iterations" value="10"/>
+    <param name="publish_pose_stamped" value="true"/>
+    <param name="publish_tf" value="false"/>
+  </node>
+</launch>
